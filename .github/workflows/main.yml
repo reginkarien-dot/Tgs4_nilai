@@ -1,0 +1,26 @@
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC (Compiler)
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Compile C++ to EXE
+      run: |
+        cl.exe /EHsc nilai.cpp /fe:program_nilai.exe
+
+    - name: Upload EXE as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: program-nilai-exe
+        path: program-nilai.ex yge
